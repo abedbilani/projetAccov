@@ -9,13 +9,10 @@ package src;
  *
  * @author Abed Bilani
  */
-public class Radar {
-
-    //socket to communicate with the system 
-
-try{
-    //get data from system and display alerts and messages
-}catch(){
-   // catch exceptions
-}
+public class Tour {
+    // list all planes
+    
+    //connect to system 
+    
+    //manage planes 
 }

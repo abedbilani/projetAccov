@@ -5,10 +5,19 @@
  */
 package src;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Abed Bilani
  */
-public class Scada {
+public class Saca {
+    //save plane in a list
+    
+    public static ArrayList<Avion> list;
+
+    // socket to communicate with planes
+    //socket to get commands 
+    //socket to send data to the radar
     
 }

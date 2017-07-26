@@ -9,13 +9,8 @@ package src;
  *
  * @author Abed Bilani
  */
-public class Radar {
-
-    //socket to communicate with the system 
-
-try{
-    //get data from system and display alerts and messages
-}catch(){
-   // catch exceptions
-}
+public class Pilot {
+    // connect to a plane using socket
+    
+    //manage a plane and send commands to controll a plane
 }

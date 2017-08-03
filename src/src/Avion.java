@@ -21,8 +21,9 @@ import java.util.Scanner;
  */
 public class Avion implements Serializable {
 
+    static String inputName;
     // properties for avion
-    static String name;
+    String name;
     // plane coordonates
     int coordX;
     int coordY;
@@ -98,24 +99,27 @@ public class Avion implements Serializable {
             return false;
         }
     }
-    
-    public String toString(){
-        return( Avion.this.name + " " + Avion.this.altittude );
-    }
 
     public static void main(String[] args) {
-        System.out.println("lalalal2222222al");
+        System.out.println("hello welcome to your plane ");
+        System.out.println("Kindly provide a name for this plane");
         try {
+            //name your plane
             Scanner sc = new Scanner(System.in);
-            name = sc.nextLine();
-            Avion avion = new Avion(name);
+            inputName = sc.nextLine();
+            Avion avion = new Avion(inputName);
             avion.avionConnect();
+
             ObjectOutputStream out = new ObjectOutputStream(avion.socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(avion.socket.getInputStream());
-            
-            out.writeObject(avion);
-            avion.socket.close();
-        } catch (Exception e) {
+            while (true) {
+                //send object Avion to server
+                out.writeObject(avion);
+                out.flush();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

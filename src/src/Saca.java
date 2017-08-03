@@ -22,33 +22,19 @@ import java.util.ArrayList;
  * @author Abed Bilani
  */
 public class Saca {
-//    //save plane in a list
-//
-//    public static ArrayList<Avion> list;
 
-    // socket to communicate with planes
-    public static void main(String[] args) throws IOException {
-        System.out.println("lalalala1111111l");
-        try {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        new Saca().runSocket();
+    }
 
-            // creating sockets
-            ServerSocket ss = new ServerSocket(1308);
+    public static void runSocket() throws IOException, ClassNotFoundException {
+        // creating server sockets
+        ServerSocket ss = new ServerSocket(1308);
+        System.out.println("Server up and ready for connections .....");
+        while (true) {
             Socket s = ss.accept();
-            System.out.println("socket created");
-
-            // read client message 
-            ObjectInputStream dataIn = new ObjectInputStream(s.getInputStream());
-            ObjectOutputStream dataOut = new ObjectOutputStream(s.getOutputStream());
-            Avion avion = (Avion) dataIn.readObject();
-            System.out.println("data here");
-
-            System.out.println(avion.altittude);
-            s.close(); 
-       } catch (Exception e) {
-
+            //start thread to handle client requests
+            new SerrverThread(s).start();
         }
     }
-    //socket to get commands 
-    //socket to send data to the radar
-
 }

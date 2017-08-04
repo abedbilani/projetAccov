@@ -31,7 +31,7 @@ public class SerrverThread extends Thread {
             ObjectInputStream dataIn = new ObjectInputStream(s.getInputStream());
             ObjectOutputStream dataOut = new ObjectOutputStream(s.getOutputStream());
             Avion planeName = (Avion) dataIn.readObject();
-            System.out.println((String) planeName.name + "is now connected");
+            System.out.println((String) planeName.name + " is now connected");
             planeList.add(avion);
             while ((avion = (Avion) dataIn.readObject()) != null) {
                 avion = (Avion) dataIn.readObject();

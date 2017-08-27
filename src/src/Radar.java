@@ -5,17 +5,54 @@
  */
 package src;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Scanner;
+import static src.Avion.inputName;
+
 /**
  *
  * @author Abed Bilani
  */
 public class Radar {
 
-    //socket to communicate with the system 
+    static Socket socket;
 
-try{
-    //get data from system and display alerts and messages
-}catch(){
-   // catch exceptions
-}
+    //socket to communicate with the system 
+    Boolean systemConnect() {
+        try {
+            socket = new Socket("localhost", 1309);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    public static void main(String[] args) throws ClassNotFoundException {
+        System.out.println("RADAR");
+        ArrayList<Avion> list = new ArrayList<Avion>();
+        try {
+
+            Radar radar = new Radar();
+            radar.systemConnect();
+            ObjectOutputStream out = new ObjectOutputStream(radar.socket.getOutputStream());
+
+            while (true) {
+                ObjectInputStream dataIn = new ObjectInputStream(socket.getInputStream());
+
+                Avion avion = (Avion) dataIn.readObject();
+                list.add(avion);
+
+                System.out.println(list.size());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

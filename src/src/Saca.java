@@ -24,17 +24,35 @@ import java.util.ArrayList;
 public class Saca {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        new Saca().runSocket();
+        ArrayList<Avion> list = new ArrayList<Avion>();
+
+        new Saca().runSocket(list);
     }
 
-    public static void runSocket() throws IOException, ClassNotFoundException {
+    public static void runSocket(ArrayList<Avion> list) throws IOException, ClassNotFoundException {
         // creating server sockets
-        ServerSocket ss = new ServerSocket(1308);
+        ServerSocket sacaSocket = new ServerSocket(1308);
+        ServerSocket radarSocket = new ServerSocket(1309);
+
         System.out.println("Server up and ready for connections .....");
         while (true) {
-            Socket s = ss.accept();
-            //start thread to handle client requests
-            new SerrverThread(s).start();
+
+            Socket cs = sacaSocket.accept();
+            Socket rs = radarSocket.accept();
+            System.out.println("socket created");
+
+            // read client message 
+            ObjectInputStream dataIn = new ObjectInputStream(cs.getInputStream());
+//            ObjectOutputStream dataOut = new ObjectOutputStream(rs.getOutputStream());
+            Avion avion = (Avion) dataIn.readObject();
+
+//            dataOut.writeObject(avion);
+//            dataOut.flush();
+            //add plane to list 
+            list.add(avion);
+            System.out.println(list.size());
+            cs.close();
+//            rs.close();
         }
     }
 }

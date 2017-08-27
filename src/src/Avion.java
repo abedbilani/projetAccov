@@ -24,6 +24,7 @@ public class Avion implements Serializable {
     static String inputName;
     // properties for avion
     String name;
+    int id;
     // plane coordonates
     int coordX;
     int coordY;
@@ -57,6 +58,7 @@ public class Avion implements Serializable {
         this.vitesseX = 0;
         this.vitesseY = 0;
         this.vitesseZ = 0;
+        this.id = (int) (100 * Math.random());
     }
 
     void changeCoord(int x, int y, int z) {
@@ -181,7 +183,7 @@ public class Avion implements Serializable {
             avion.avionConnect();
             count = 1;
             ObjectOutputStream out = new ObjectOutputStream(avion.socket.getOutputStream());
-            ObjectInputStream in = new ObjectInputStream(avion.socket.getInputStream());
+//            ObjectInputStream in = new ObjectInputStream(avion.socket.getInputStream());
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             while (true) {
                 if (count == 1) {
